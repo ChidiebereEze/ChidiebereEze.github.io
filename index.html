@@ -179,7 +179,7 @@
 
   /* PHILOSOPHY */
   .philosophy {
-    padding: 7rem 3rem;
+    padding: 5rem 3rem;
     display: grid;
     grid-template-columns: 1fr 1.4fr;
     gap: 4rem;
@@ -271,7 +271,7 @@
 
   /* QUOTE BANNER */
   .quote-banner {
-    padding: 7rem 3rem;
+    padding: 5rem 3rem;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -306,7 +306,7 @@
 
   /* SERVICES */
   .services {
-    padding: 7rem 3rem;
+    padding: 5rem 3rem;
     border-top: 1px solid rgba(255,255,255,0.06);
   }
   .services h2 {
@@ -422,7 +422,8 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .fade-in { opacity: 0; animation: fadeUp 0.9s ease forwards; }
+  .fade-in { opacity: 1; animation: fadeUp 0.9s ease forwards; }
+  .scroll-reveal { opacity: 1 !important; transform: translateY(0) !important; }
   .delay-1 { animation-delay: 0.15s; }
   .delay-2 { animation-delay: 0.3s; }
   .delay-3 { animation-delay: 0.45s; }
@@ -636,11 +637,21 @@
   <span class="footer-tag">MECHATRONICS · DATA · ENGINEERING</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Scroll-triggered fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
         entry.target.style.opacity = '1';
-   
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+    observer.observe(el);
+  });
+</script>
